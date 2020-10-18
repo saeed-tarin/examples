@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+body {font-family: Arial, Helvetica, sans-serif; direction:rtl;}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  
+}
+
+button {
+  background-color: #00ffff;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.picture {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  
+  padding-top: 16px;
+}
+
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; 
+  border: 1px solid #888;
+  width: 80%;
+  
+}
+
+@media screen and (min-width: 400px) {
+  
+  .modal-content {
+     width: 300px;
+  }
+}
+
+
+</style>
+</head>
+<body>
+
+  <form class="modal-content">
+    <div class="imgcontainer"> 
+      <img src="" alt="picture" class="picture">
+      <p id="msg1"></p>
+    </div>
+	
+    <div class="container" >
+      <label for="fname"><b>نام</b></label>
+      <input type="text" id="fname1" placeholder="*نام را وارد کنید" name="fname" required>
+	
+      <label for="lname"><b>نام خانوادگی</b></label>
+      <input type="text" id="lname1" placeholder="*نام خانوادگی را وارد کنید" name="lname" required>
+      
+      <label for="email"><b>ایمیل</b></label>
+      <input type="text" id="email1" placeholder="*ایمیل را وارد کنید" name="email"  required>
+        
+      <label for="psw"><b>رمزعبور</b></label>
+      <input type="password" id="pass1" placeholder="*رمز عبور را وارد کنید" name="psw" required>
+      
+      <label for="psw"><b>تکرار رمز عبور</b></label>
+      <input type="password" id="pass2" placeholder="*تکرار رمز عبور را وارد کنید " name="psw1" required>
+      
+      <button onclick="myFunction()">ارسال</button>
+      <label>
+    </div>
+
+      
+     
+   
+  </form>
+</div>
+
+<script>
+
+function f2(a){
+  if(a==0){
+  	alert("فیلدهای * دار نباید خالی باشند");
+  }else if(a==1)
+  {
+    alert("نام فقط باید از حروف کوچک و بزرگ باشند");
+  	document.getElementById("fname1").value = "";
+  }else if(a==2){
+  	alert("نام خانوادگی فقط باید از حروف کوچک و بزرگ باشند");
+  	document.getElementById("lname1").value = "";
+  }else if(a==3){
+    alert("ایمیل را صحیح وارد کنید");
+  	document.getElementById("email1").value = "";
+  }else if(a==4){
+  	alert("رمزعبور و تکرار رمزعبور باید برابر باشند");
+  	document.getElementById("pass1").value = "";
+    document.getElementById("pass2").value = "";
+  }
+  
+}
+
+function myFunction() {
+  var patt1 = /[^A-z]/g;
+  var patt2 = /([\w\-]+\@[\w\-]+\.[\w\-]+)/;
+  var message, fname, lname, pass1, pass2, email;
+  message = document.getElementById("msg1");
+  message.innerHTML = "";
+  fname = document.getElementById("fname1").value;
+  lname = document.getElementById("lname1").value;
+  email = document.getElementById("email1").value;
+  pass1 = document.getElementById("pass1").value;
+  pass2 = document.getElementById("pass2").value;
+  try { 
+  
+    if((fname == "") || (lname == "") || (email == "") ||
+    	(pass1 == "") || (pass2 == ""))  throw f2(0);
+        
+    if(patt1.test(fname))  throw f2(1);
+    
+    if(patt1.test(lname))
+  	    throw f2(2);
+    
+    if(!(patt2.test(email))) throw f2(3);
+    
+    if(pass1!=pass2) throw f2(4);
+    
+  }
+  catch(err) {
+   return false;
+  }
+  message.innerHTML = "اطلاعات شما با موفقیت ارسال شد"
+  console.log("name is: " + fname + "\nlast name is: " + lname +
+  			"\nemail is: " + email + "\npassword is: " + pass1 +
+            "\nrepeat password is: " + pass2)
+}
+</script>
+
+</body>
+</html>
